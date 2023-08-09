@@ -37,26 +37,26 @@ export default function App() {
     setData();
   }
 
-if(estado == 'leitura'){
+if(estado == 'leitura'){ //tela inicial
  return(
   <View style={{flex:1}} >
     <StatusBar style="light" />
       <View style={styles.header}><Text style={{textAlign:'center',fontSize:20, color:'white'}}>NotePaddinger</Text></View>
     {
-      (anotacao != '')?
+      (anotacao != '')? // se houver anotação mostrar
       <View style={{padding:20}}>
         
         <Text style={styles.anotacao}>{anotacao}</Text>
         <Text style={styles.anotacao}>{anotacao2}</Text>
         
       </View>
-      :
+      : //senão, adicionar
       <View><Text style={{opacity:0.3, textAlign:'center', paddingVertical:50}}>adicione uma Anotação</Text></View>
     }
           <TouchableOpacity onPress={()=>setarEstado('atualizando')} style={styles.btnAnotacao}><Text style={styles.btnAnotacaoTexto}>+</Text></TouchableOpacity>
 
   </View>
- )}else if(estado == 'atualizando'){
+ )}else if(estado == 'atualizando'){ //fazendo anotação
   return(
   <View style={{flex:1}} >
       <StatusBar style="light" />
