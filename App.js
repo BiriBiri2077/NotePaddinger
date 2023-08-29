@@ -1,7 +1,6 @@
 import { StatusBar } from "expo-status-bar";
 import React, { useEffect, useState} from "react";
-import { View, TouchableOpacity, StyleSheet, Text, TextInput,AsyncStorage} from "react-native"
-
+import { View, TouchableOpacity, StyleSheet, Text, TextInput,AsyncStorage, Image} from "react-native"
 
 
 
@@ -24,13 +23,9 @@ export default function App() {
   setData = async() => {
     try{
       await AsyncStorage.setItem('anotacao',anotacao);
-    }catch(error){
-
-    }
-
+    }catch(error){}
     alert('Sua anotação foi salva');
   }
-
 
   function atualizarTexto(){
     setarEstado('leitura');
@@ -39,32 +34,30 @@ export default function App() {
 
 if(estado == 'leitura'){ //tela inicial
  return(
-  <View style={{flex:1}} >
+  <View style={{flex:1, backgroundColor:'#C6D8E6'}} >
     <StatusBar style="light" />
       <View style={styles.header}><Text style={{textAlign:'center',fontSize:20, color:'white'}}>NotePaddinger</Text></View>
     {
       (anotacao != '')? // se houver anotação mostrar
-      <View style={{padding:20}}>
-        
-        <Text style={styles.anotacao}>{anotacao}</Text>
-        <Text style={styles.anotacao}>{anotacao2}</Text>
-        
-      </View>
+    <View style={{padding:20}}>      
+      <Text style={styles.anotacao}>{anotacao}</Text>
+         
+    </View>
       : //senão, adicionar
-      <View><Text style={{opacity:0.3, textAlign:'center', paddingVertical:50}}>adicione uma Anotação</Text></View>
+    <View><Text style={{opacity:0.3, textAlign:'center', paddingVertical:50, fontSize:18}}>adicione uma Anotação</Text></View>
     }
-          <TouchableOpacity onPress={()=>setarEstado('atualizando')} style={styles.btnAnotacao}><Text style={styles.btnAnotacaoTexto}>+</Text></TouchableOpacity>
+    <TouchableOpacity onPress={()=>setarEstado('atualizando')} style={styles.btnAnotacao}><Text style={styles.btnAnotacaoTexto}>+</Text></TouchableOpacity>
 
   </View>
  )}else if(estado == 'atualizando'){ //fazendo anotação
   return(
-  <View style={{flex:1}} >
-      <StatusBar style="light" />
-        <View style={styles.header}>
-          <Text style={{textAlign:'center',fontSize:20, color:'white'}}>NotePaddinger</Text></View>
-        <TextInput autoFocus={true} style={{height:300, textAlignVertical:'top',padding:20}} onChangeText={(text)=>setarAnotacao(text)} multiline={true} numberOfLines={7} value={anotacao}></TextInput>
-      <TouchableOpacity onPress={()=>atualizarTexto()} style={styles.btnSalvar}><Text style={{textAlign:'center', color:'white'}}>Salvar</Text></TouchableOpacity>
-  </View>
+    <View style={{flex:1, backgroundColor:'#5C93B8'}} >
+        <StatusBar style="light" />
+          <View style={styles.header}>
+            <Text style={{textAlign:'center',fontSize:20, color:'white'}}>NotePaddinger</Text></View>
+          <TextInput autoFocus={true} style={{height:300, textAlignVertical:'top',padding:20, backgroundColor:'#9DBED4', borderRadius:30, fontSize:20}} onChangeText={(text)=>setarAnotacao(text)} multiline={true} numberOfLines={7} value={anotacao}></TextInput>
+        <TouchableOpacity onPress={()=>atualizarTexto()} style={styles.btnSalvar}><Text>OK</Text></TouchableOpacity>
+    </View>
 );}
 }
 
@@ -74,13 +67,13 @@ if(estado == 'leitura'){ //tela inicial
 const styles = StyleSheet.create({
   header:{
     width: '100%',
-    padding:15,
-    backgroundColor: '#069'
+    padding:18,
+    backgroundColor: '#9AB4DB'
   },
   anotacao:{
     fontSize:20,
     padding:5,
-    backgroundColor:'orange',
+    backgroundColor:'#9AB4DB',
     paddingBottom:70,
     borderRadius:20,
     marginBottom:20
@@ -88,11 +81,9 @@ const styles = StyleSheet.create({
   btnAnotacao:{
     width:50,
     height:50,
-    backgroundColor:'#069',
+    backgroundColor:'#7B90AF',
     borderRadius:25,
     alignSelf:'center'
-    
-    
   },
   btnAnotacaoTexto:{
     color:'white',
@@ -103,12 +94,14 @@ const styles = StyleSheet.create({
   },
   btnSalvar:{
     position:'absolute',
-    right:20,
+    right:30,
     bottom:20,
-    width:100,
-    paddingTop:10,
-    paddingBottom:10,
+    width:50,
+    height:50,
+    borderRadius:25,
+    padding:15,
     backgroundColor:'#069',
+    textAlign:'center',
     }
 
 });
