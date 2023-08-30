@@ -9,7 +9,6 @@ export default function App() {
 
   const [estado,setarEstado] = useState('leitura');
   const [anotacao,setarAnotacao,] = useState('');
-  const [anotacao2,setarAnotacao2] = useState('');
 
   useEffect(()=>{
     (async () => {
